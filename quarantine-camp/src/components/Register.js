@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+//import axiosWithAuth from '../utilities/axiosWithAuth';
 
 const Register = () => {
-    
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const credentials = { username, password }
+
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(username, password)
+        console.log(credentials)
     }
 
     return (
