@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 
 const Register = () => {
 
@@ -29,6 +31,8 @@ const Register = () => {
             />
 
             <button onSubmit={handleSubmit}>Submit</button>
+
+            <Link className='link' to='/'>Log In</Link>
             
         </form>
 
