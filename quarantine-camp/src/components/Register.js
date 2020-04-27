@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-
 const Register = () => {
-
-    const handleChange = e => {
-    }
+    
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleSubmit = e => {
+        e.preventDefault();
+        console.log(username, password)
     }
 
     return (
 
-        <form className='register-form'>
+        <form className='register-form' onSubmit={handleSubmit}>
 
             <input
                 className='input'
                 type='text'
                 name='username'
                 placeholder='username'
-                onChange={handleChange}
+                onChange={e => setUsername(e.target.value)}
             />
 
             <input
@@ -27,10 +28,10 @@ const Register = () => {
                 type='password'
                 name='password'
                 placeholder='password'
-                onChange={handleChange}
+                onChange={e => setPassword(e.target.value)}
             />
 
-            <button onSubmit={handleSubmit}>Submit</button>
+            <button value='submit'>Submit</button>
 
             <Link className='link' to='/'>Log In</Link>
             
