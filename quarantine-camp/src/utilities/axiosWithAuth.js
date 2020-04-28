@@ -6,7 +6,7 @@ const axiosWithAuth = () => {
     return axios.create({
         baseURL: 'https://quarantine-camp.herokuapp.com/',
         headers: {
-            Authorization: token
+            'Authorization': `Token ${token}`,
         }
     });
 };
