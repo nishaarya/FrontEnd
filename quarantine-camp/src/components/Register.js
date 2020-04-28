@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-//import axiosWithAuth from '../utilities/axiosWithAuth';
+import axiosWithAuth from '../utilities/axiosWithAuth';
 
 const Register = () => {
 
@@ -15,6 +15,14 @@ const Register = () => {
         if ( username.length > 3 || password.length > 6 ) {
             setError(false)
             console.log(credentials)
+            axiosWithAuth()
+            .post('register/', credentials)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
         } else {
             setError(true)
         };

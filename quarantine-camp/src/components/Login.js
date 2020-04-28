@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-//import axiosWithAuth from '../utilities/axiosWithAuth';
+import axiosWithAuth from '../utilities/axiosWithAuth';
 
 const Login = () => {
 
@@ -15,6 +15,14 @@ const Login = () => {
         if ( username.length > 3 || password.length > 8 ) {
             setError(false)
             console.log(credentials)
+            axiosWithAuth()
+            .post('api_token_auth/', credentials)
+            .then(res => {
+                localStorage.setItem('token', res.data.token)
+            })
+            .catch(err => {
+                console.log(err)
+            })
         } else {
             setError(true)
         };
