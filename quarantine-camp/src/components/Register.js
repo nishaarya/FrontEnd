@@ -34,7 +34,7 @@ const Register = () => {
                 onChange={e => setPassword(e.target.value)}
             />
 
-            <button value='submit'>Submit</button>
+            <button value='submit'>sign up</button>
 
             <Link className='link' to='/'>Log In</Link>
             
