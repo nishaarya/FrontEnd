@@ -6,14 +6,26 @@ const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(false);
+    const [usernameError, setUsernameError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [credentialError, setCredentialError] = useState(false);
 
     const credentials = { username, password };
 
     const handleSubmit = e => {
         e.preventDefault();
-        if ( username.length > 3 || password.length > 8 ) {
-            setError(false)
+
+        if ( username.length < 3 ) {
+            setUsernameError(true);
+        } else {
+            setUsernameError(false);
+
+        } if (password.length < 8 ) {
+            setPasswordError(true);
+        } else {
+            setPasswordError(false);
+
+        } if ( !passwordError && !usernameError ) {
             console.log(credentials)
             axiosWithAuth()
             .post('api_token_auth/', credentials)
@@ -22,9 +34,8 @@ const Login = () => {
             })
             .catch(err => {
                 console.log(err)
-            })
-        } else {
-            setError(true)
+                setCredentialError(true);
+            });
         };
     };
  
@@ -40,8 +51,8 @@ const Login = () => {
                 onChange={e => setUsername(e.target.value)}
             />
 
-            { error && (
-                <span> Username must be at least 3 characters long </span>
+            { usernameError && (
+                <span> username must be at least 3 characters long </span>
             )}
 
             <input
@@ -52,9 +63,14 @@ const Login = () => {
                 onChange={e => setPassword(e.target.value)}
             />
 
-            { error && (
-                <span> Password must be at least 8 characters long </span>
-            )}
+            { passwordError ? (
+                <span> password must be at least 8 characters long </span>
+
+            ) : credentialError ? (
+                <span> login error </span>
+                
+            ) : null
+            }
             
             <button value='submit'>log in</button>
 
