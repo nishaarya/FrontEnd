@@ -15,6 +15,7 @@ const Login = () => {
     const handleSubmit = e => {
         e.preventDefault();
 
+    // error handling
         if ( username.length < 3 ) {
             setUsernameError(true);
         } else {
@@ -24,7 +25,8 @@ const Login = () => {
             setPasswordError(true);
         } else {
             setPasswordError(false);
-
+    // error handling
+    
         } if ( !passwordError && !usernameError ) {
             console.log(credentials);
             axiosWithAuth()

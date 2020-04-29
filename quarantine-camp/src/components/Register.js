@@ -16,7 +16,8 @@ const Register = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-
+        
+    // error handling
         if ( password1 !== password2 ) {
             setMatch(false);
         } else {
@@ -31,11 +32,12 @@ const Register = () => {
             setPasswordError(true);
         } else {
             setPasswordError(false);
+    // error handling
 
         } if ( match && !passwordError && !usernameError ) {
             console.log(credentials);
             axiosWithAuth()
-            .post('register/', credentials)
+            .post('registration/', credentials)
             .then(res => {
                 setRegistrationError(false);
                 console.log(res.data);
@@ -87,7 +89,7 @@ const Register = () => {
                 <span> passwords must match </span>
 
             ) : registrationError ? (
-                    <span> registration error</span>
+                    <span> registration error </span>
                     
             ) : null
             }  
