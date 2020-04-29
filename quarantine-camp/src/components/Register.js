@@ -85,7 +85,7 @@ const Register = () => {
 
             { !match ? (
                 <span> passwords must match </span>
-                
+
             ) : registrationError ? (
                     <span> registration error</span>
                     
@@ -94,7 +94,7 @@ const Register = () => {
 
             <button value='submit'>sign up</button>
 
-            <Link className='link' to='/'>Log In</Link>
+            <Link className='link' to='/'>log in</Link>
             
         </form>
 

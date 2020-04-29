@@ -75,7 +75,7 @@ const Login = () => {
             
             <button value='submit'>log in</button>
 
-            <Link className='link' to='/register'>Register</Link>
+            <Link className='link' to='/register'>register</Link>
 
         </form>
 
