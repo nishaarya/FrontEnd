@@ -10,6 +10,7 @@ const Register = () => {
     const [match, setMatch] = useState(true);
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [registrationError, setRegistrationError] = useState(false);
 
     const credentials = { username, password1, password2 };
 
@@ -36,10 +37,12 @@ const Register = () => {
             axiosWithAuth()
             .post('register/', credentials)
             .then(res => {
-                console.log(res.data)
+                setRegistrationError(false);
+                console.log(res.data);
             })
             .catch(err => {
-                console.log(err)
+                console.log(err);
+                setRegistrationError(true);
             });
         };
     };
@@ -69,7 +72,7 @@ const Register = () => {
             />
 
             { passwordError && (
-                <span> Password must be at least 8 characters long</span>
+                <span> password must be at least 8 characters long</span>
             )}      
 
             <input
@@ -80,9 +83,14 @@ const Register = () => {
                 onChange={e => setPassword2(e.target.value)}
             />
 
-            { !match && (
-                <span> Passwords must match </span>
-            )}  
+            { !match ? (
+                <span> passwords must match </span>
+                
+            ) : registrationError ? (
+                    <span> registration error</span>
+                    
+            ) : null
+            }  
 
             <button value='submit'>sign up</button>
 

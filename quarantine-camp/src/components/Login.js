@@ -26,14 +26,15 @@ const Login = () => {
             setPasswordError(false);
 
         } if ( !passwordError && !usernameError ) {
-            console.log(credentials)
+            console.log(credentials);
             axiosWithAuth()
             .post('api_token_auth/', credentials)
             .then(res => {
-                localStorage.setItem('token', res.data.token)
+                setCredentialError(false);
+                localStorage.setItem('token', res.data.token);
             })
             .catch(err => {
-                console.log(err)
+                console.log(err);
                 setCredentialError(true);
             });
         };
