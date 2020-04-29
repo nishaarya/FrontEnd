@@ -40,7 +40,7 @@ const Register = () => {
             .post('registration/', credentials)
             .then(res => {
                 setRegistrationError(false);
-                console.log(res.data);
+                localStorage.setItem('token', res.data.key);
             })
             .catch(err => {
                 console.log(err);
