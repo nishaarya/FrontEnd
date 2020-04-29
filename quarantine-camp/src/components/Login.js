@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
-const Login = () => {
+const Login = (props) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -35,6 +35,7 @@ const Login = () => {
                 console.log(res.data.key)
                 setCredentialError(false);
                 localStorage.setItem('token', res.data.key);
+                props.history.push('/world-map');
             })
             .catch(err => {
                 console.log(err);

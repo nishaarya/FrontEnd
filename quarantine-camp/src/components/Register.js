@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
-const Register = () => {
+const Register = (props) => {
 
     const [username, setUsername] = useState('');
     const [password1, setPassword1] = useState('');
@@ -41,6 +41,7 @@ const Register = () => {
             .then(res => {
                 setRegistrationError(false);
                 localStorage.setItem('token', res.data.key);
+                props.history.push('/world-map');
             })
             .catch(err => {
                 console.log(err);
