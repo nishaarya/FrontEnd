@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import axiosWithAuth from '../utilities/axiosWithAuth';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -29,9 +29,10 @@ const Login = () => {
 
         } if ( !passwordError && !usernameError ) {
             console.log(credentials);
-            axiosWithAuth()
-            .post('login/', credentials)
+            axios
+            .post('https://quarantine-camp.herokuapp.com/api/login/', credentials)
             .then(res => {
+                console.log(res.data.key)
                 setCredentialError(false);
                 localStorage.setItem('token', res.data.key);
             })
