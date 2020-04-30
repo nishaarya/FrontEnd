@@ -1,22 +1,46 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-//import axiosWithAuth from '../utilities/axiosWithAuth';
+import axios from 'axios';
 
-const Login = () => {
+const Login = (props) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(false);
+    const [usernameError, setUsernameError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [credentialError, setCredentialError] = useState(false);
 
     const credentials = { username, password };
 
     const handleSubmit = e => {
         e.preventDefault();
-        if ( username.length > 3 || password.length > 8 ) {
-            setError(false)
-            console.log(credentials)
+
+    // error handling
+        if ( username.length < 3 ) {
+            setUsernameError(true);
         } else {
-            setError(true)
+            setUsernameError(false);
+
+        } if (password.length < 8 ) {
+            setPasswordError(true);
+        } else {
+            setPasswordError(false);
+    // error handling
+
+        } if ( !passwordError && !usernameError ) {
+            console.log(credentials);
+            axios
+            .post('https://quarantine-camp.herokuapp.com/api/login/', credentials)
+            .then(res => {
+                console.log(res.data.key)
+                setCredentialError(false);
+                localStorage.setItem('token', res.data.key);
+                props.history.push('/world-map');
+            })
+            .catch(err => {
+                console.log(err);
+                setCredentialError(true);
+            });
         };
     };
  
@@ -32,8 +56,8 @@ const Login = () => {
                 onChange={e => setUsername(e.target.value)}
             />
 
-            { error && (
-                <span> Username must be at least 3 characters long </span>
+            { usernameError && (
+                <span> username must be at least 3 characters long </span>
             )}
 
             <input
@@ -44,13 +68,18 @@ const Login = () => {
                 onChange={e => setPassword(e.target.value)}
             />
 
-            { error && (
-                <span> Password must be at least 8 characters long </span>
-            )}
+            { passwordError ? (
+                <span> password must be at least 8 characters long </span>
+
+            ) : credentialError ? (
+                <span> login error </span>
+                
+            ) : null
+            }
             
             <button value='submit'>log in</button>
 
-            <Link className='link' to='/register'>Register</Link>
+            <Link className='link' to='/register'>register</Link>
 
         </form>
 
